@@ -1,8 +1,10 @@
 # 🏥 Hospital Supply Chain Management System  
 ## Week 10 – Modeling
-COP2839 ASP.NET Program w/C#
-Instructor: Castillo Andino
-Taneisha Milkunic
+
+# COP2839 ASP.NET Program w/C#
+# Instructor: Castillo Andino
+# Taneisha Milkunic
+# October 2025
 
 ### **Feature Implemented:**  
 Creation of core data models for the Hospital Supply Chain Management System (HSCMS).
@@ -47,4 +49,5 @@ Verification was performed through **SQL Server Object Explorer**, confirming th
 ![Db screenshot](image-4.png)
 
 ---
+
 

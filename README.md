@@ -1,5 +1,8 @@
 # 🏥 Hospital Supply Chain Management System  
 ## Week 10 – Modeling
+COP2839 ASP.NET Program w/C#
+Instructor: Castillo Andino
+Taneisha Milkunic
 
 ### **Feature Implemented:**  
 Creation of core data models for the Hospital Supply Chain Management System (HSCMS).
@@ -45,11 +48,3 @@ Verification was performed through **SQL Server Object Explorer**, confirming th
 
 ---
 
-### **Checklist for Completion**
- [x] Entity classes (`Product`, `Supplier`, `Order`) created  
- [x] `ApplicationDbContext` configured with `DbSet<T>`  
- [x] Relationships defined using Fluent API  
- [x] Migration (`InitialCreate`) generated successfully  
- [x] Database created and verified in SQL Server  
-
----

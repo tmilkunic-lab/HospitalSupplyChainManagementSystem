@@ -2,7 +2,7 @@
 ## Week 10 – Modeling
 
 # COP2839 ASP.NET Program w/C#
-# Instructor: Castillo Andino
+# Instructor: Franklin Castillo 
 # Taneisha Milkunic
 # October 2025
 
@@ -49,5 +49,6 @@ Verification was performed through **SQL Server Object Explorer**, confirming th
 ![Db screenshot](image-4.png)
 
 ---
+
 
 

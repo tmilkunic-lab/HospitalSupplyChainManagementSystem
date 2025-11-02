@@ -1,4 +1,39 @@
 # 🏥 Hospital Supply Chain Management System  
+## Week 11 – Separation of Concerns & Dependency Injection
+# COP2839 ASP.NET Program w/C#
+# Instructor: Franklin Castillo 
+# Taneisha Milkunic
+# October 2025
+
+## Week 11 — Separation of Concerns & Dependency Injection
+
+This week I refactored the Hospital Supply Chain Management System (ASP.NET Core MVC, .NET 8) to follow Separation of Concerns and use Dependency Injection for non-UI logic. I introduced a service layer that centralizes business rules and data access coordination so controllers remain thin and focused on HTTP concerns.
+
+### What I implemented
+- **Service contract** `IInventoryService` with `GetDashboardSummaryAsync()`.
+- **Concrete service** `InventoryService` that uses `ApplicationDbContext` to compute a dashboard summary (products, suppliers, and order status counts).
+- **DI registration** in `Program.cs` using `AddScoped<IInventoryService, InventoryService>()` (Scoped is appropriate for EF Core–backed services).
+- **Controller injection** in `HomeController` and an async `Index` action that calls the service and returns a `DashboardSummary` model to the view.
+- **View update** (`Views/Home/Index.cshtml`) strongly typed to `DashboardSummary`.
+
+### Why this matters
+Moving logic from controllers into services improves testability (mock the service), reuse (share across controllers), and maintainability (clearer responsibilities). DI decouples the interface from its implementation and makes dependencies explicit.
+
+### Files
+- `/Services/IInventoryService.cs`
+- `/Services/InventoryService.cs`
+- `/Models/DashboardSummary.cs`
+- `/Controllers/HomeController.cs` (constructor + Index)
+- `/Views/Home/Index.cshtml`
+- `/Program.cs` (DI registration)
+
+### Screenshots
+Include: Solution Explorer showing `Services/`, DI registration in `Program.cs`, `HomeController` constructor with `IInventoryService`, and the running dashboard page.
+
+
+
+
+# 🏥 Hospital Supply Chain Management System  
 ## Week 10 – Modeling
 
 # COP2839 ASP.NET Program w/C#
@@ -49,6 +84,7 @@ Verification was performed through **SQL Server Object Explorer**, confirming th
 ![Db screenshot](image-4.png)
 
 ---
+
 
 
 

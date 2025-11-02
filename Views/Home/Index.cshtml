@@ -1,8 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model HospitalSupplyChainManagementSystem.Models.DashboardSummary
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1 class="display-6">Hospital Supply Chain — Dashboard</h1>
+
+<div class="row gy-3 mt-3">
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Products</h5>
+                <p class="card-text fs-3">@Model.TotalProducts</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Suppliers</h5>
+                <p class="card-text fs-3">@Model.TotalSuppliers</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Orders</h5>
+                <p class="mb-0">Open: <strong>@Model.OpenOrders</strong></p>
+                <p class="mb-0">Pending: <strong>@Model.PendingOrders</strong></p>
+                <p class="mb-0">Fulfilled: <strong>@Model.FulfilledOrders</strong></p>
+            </div>
+        </div>
+    </div>
 </div>

@@ -16,6 +16,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var app = builder.Build();
 
+// DI registration for business services (Scoped = per-request)
+builder.Services.AddScoped<
+    HospitalSupplyChainManagementSystem.Services.IInventoryService,
+    HospitalSupplyChainManagementSystem.Services.InventoryService>();
+
+
 // 3️⃣ Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {

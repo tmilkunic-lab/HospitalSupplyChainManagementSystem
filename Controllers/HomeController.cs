@@ -1,21 +1,32 @@
 using HospitalSupplyChainManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using HospitalSupplyChainManagementSystem.Services;
+
+using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using HospitalSupplyChainManagementSystem.Models;
+using HospitalSupplyChainManagementSystem.Services;  // <-- needed for IInventoryService
 
 namespace HospitalSupplyChainManagementSystem.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IInventoryService _inventory;   // <-- make sure this field exists
 
-        public HomeController(ILogger<HomeController> logger)
+        // NOTE the comma between parameters and exact casing of IInventoryService
+        public HomeController(ILogger<HomeController> logger, IInventoryService inventory)
         {
             _logger = logger;
+            _inventory = inventory;  // <-- assigns the injected service to the field
         }
 
-        public IActionResult Index()
+        // Make the action async and return the service result to the view
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var summary = await _inventory.GetDashboardSummaryAsync();
+            return View(summary);
         }
 
         public IActionResult Privacy()

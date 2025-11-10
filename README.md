@@ -1,4 +1,29 @@
 # 🏥 Hospital Supply Chain Management System  
+## Week 12 – CRUD (Vendors Vertical Slice)
+# COP2839 ASP.NET Program w/C#
+# Instructor: Franklin Castillo 
+# Taneisha Milkunic
+# November 2025
+
+**Overview:**  
+This week’s task was to implement a complete CRUD feature using ASP.NET Core MVC and EF Core with asynchronous operations and validation.
+
+**What was implemented:**  
+- Added `Vendor` model with `[Required]`, `[EmailAddress]`, and `[Phone]` attributes.  
+- Registered the `DbSet<Vendor>` in `ApplicationDbContext`.  
+- Generated `VendorsController` and Razor Views with full async support:
+  - `ToListAsync()` for listing data  
+  - `FindAsync()` / `FirstOrDefaultAsync()` for detail retrieval  
+  - `SaveChangesAsync()` for create/edit/delete  
+- Configured validation feedback in Create/Edit views.  
+- Verified environment-specific configuration and connection string using LocalDB.  
+
+**Evidence:**  
+Screenshots in file folder
+
+
+
+# 🏥 Hospital Supply Chain Management System  
 ## Week 11 – Separation of Concerns & Dependency Injection
 # COP2839 ASP.NET Program w/C#
 # Instructor: Franklin Castillo 
@@ -84,6 +109,7 @@ Verification was performed through **SQL Server Object Explorer**, confirming th
 ![Db screenshot](image-4.png)
 
 ---
+
 
 
 

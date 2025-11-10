@@ -12,6 +12,8 @@ namespace HospitalSupplyChainManagementSystem.Data
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<HospitalSupplyChainManagementSystem.Models.Vendor> Vendors { get; set; } = default!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

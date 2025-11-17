@@ -1,3 +1,28 @@
+# Hospital Supply Chain Management System (HSCMS)
+
+## Week 13 – Diagnostics and Health Checks  
+**COP2839 – ASP.NET Development**  
+**Taneisha Milkunic**  
+**November 2025**
+
+This week I implemented the Diagnostics feature for the Hospital Supply Chain Management System by adding a dedicated `/healthz` endpoint along with a real dependency check on the database. The purpose of this feature is to give the application a lightweight way for developers, administrators, and future deployment environments to quickly verify the health of the system without fully loading the UI or logging into the application.
+
+Inside `Program.cs`, I registered ASP.NET Core Health Checks using `builder.Services.AddHealthChecks()` and then connected a real dependency check using a custom class called `DatabaseHealthCheck`. This class receives an instance of `ApplicationDbContext` and calls `Database.CanConnectAsync()` to validate that the application can successfully talk to the SQL Server database. If the database is online and reachable, the health check returns `Healthy`; otherwise, it returns `Unhealthy` with a high-level message to help identify the issue. No secrets, connection strings, or sensitive information are exposed in the output.
+
+Next, I implemented the `/healthz` endpoint using `app.MapHealthChecks("/healthz", new HealthCheckOptions { ... })`. I created a custom `ResponseWriter` that returns a formatted JSON output containing the overall application status, each health check’s result, a description, and duration timings. This ensures the diagnostics are readable and useful for troubleshooting, and appropriate for container orchestrators, cloud services, or uptime monitoring tools.
+
+Having a dedicated health endpoint is extremely important in real-world hospital supply chain environments where communication between software systems must be reliable. If the database ever goes down, or if there is a configuration or deployment issue, `/healthz` will immediately begin reporting degraded or failed status, allowing staff to take action quickly. This assignment demonstrates how proper diagnostics contribute to dependable software and prepares the project for scalable deployments in the future.
+
+### Evidence Included
+- Updated `Program.cs` showing Health Check registration and `/healthz` endpoint  
+- Added `DatabaseHealthCheck.cs` for real DB dependency monitoring  
+- Screenshot of the `/healthz` endpoint returning JSON  
+- GitHub repository updated with Week 13 code changes  
+
+Repository link:  
+https://github.com/tmilkunic-lab/HospitalSupplyChainManagementSystem
+
+
 # 🏥 Hospital Supply Chain Management System  
 ## Week 11 – Separation of Concerns & Dependency Injection
 # COP2839 ASP.NET Program w/C#

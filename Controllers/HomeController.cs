@@ -3,10 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using HospitalSupplyChainManagementSystem.Services;
 
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using HospitalSupplyChainManagementSystem.Models;
-using HospitalSupplyChainManagementSystem.Services;  // <-- needed for IInventoryService
+
 
 namespace HospitalSupplyChainManagementSystem.Controllers
 {

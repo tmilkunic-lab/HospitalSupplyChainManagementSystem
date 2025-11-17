@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HospitalSupplyChainManagementSystem.Models
@@ -10,10 +9,10 @@ namespace HospitalSupplyChainManagementSystem.Models
         public int ProductId { get; set; }
 
         [Required, StringLength(100)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [Required]
-        public string Category { get; set; }
+        public string Category { get; set; } = string.Empty;
 
         [Range(0, int.MaxValue)]
         public int QuantityInStock { get; set; }
@@ -21,7 +20,11 @@ namespace HospitalSupplyChainManagementSystem.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal UnitPrice { get; set; }
 
+        // Foreign key
         public int SupplierId { get; set; }
-        public Supplier Supplier { get; set; }
+
+        // Navigation property
+        public Supplier Supplier { get; set; } = null!;
     }
 }
+

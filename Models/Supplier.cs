@@ -9,18 +9,19 @@ namespace HospitalSupplyChainManagementSystem.Models
         public int SupplierId { get; set; }
 
         [Required, StringLength(100)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [StringLength(100)]
-        public string ContactPerson { get; set; }
+        public string ContactPerson { get; set; } = string.Empty;
 
         [EmailAddress]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Phone]
-        public string Phone { get; set; }
+        public string Phone { get; set; } = string.Empty;
 
-        public ICollection<Product> Products { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        // Navigation collections – must be initialized
+        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

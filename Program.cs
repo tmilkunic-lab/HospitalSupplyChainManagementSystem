@@ -2,32 +2,74 @@
 using HospitalSupplyChainManagementSystem.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Text.Json;
-using System.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ---------------------------------------------------------
+// Logging (Structured + Console)
+// ---------------------------------------------------------
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
+// ---------------------------------------------------------
 // MVC
+// ---------------------------------------------------------
 builder.Services.AddControllersWithViews();
 
+// ---------------------------------------------------------
 // EF Core DbContext
+// ---------------------------------------------------------
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection")));
 
-// Business services
+// ---------------------------------------------------------
+// Business Services (DI)
+// ---------------------------------------------------------
 builder.Services.AddScoped<IInventoryService, InventoryService>();
 
-// Health checks – real DB dependency
+// ---------------------------------------------------------
+// Health Checks
+// ---------------------------------------------------------
 builder.Services.AddHealthChecks()
     .AddCheck<DatabaseHealthCheck>("HSCMS-Database");
 
-
-// Build
+// ---------------------------------------------------------
+// Build App
+// ---------------------------------------------------------
 var app = builder.Build();
 
-// Pipeline
+// ---------------------------------------------------------
+// Ensure database exists (bypasses broken EF tools)
+// ---------------------------------------------------------
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.EnsureCreated();
+}
+
+// ---------------------------------------------------------
+// Structured Logging Scope (Correlation ID)
+// ---------------------------------------------------------
+var logger = app.Logger;
+
+app.Use(async (context, next) =>
+{
+    using (logger.BeginScope(new Dictionary<string, object?>
+    {
+        ["CorrelationId"] = context.TraceIdentifier,
+        ["RequestPath"] = context.Request.Path,
+        ["Method"] = context.Request.Method
+    }))
+    {
+        await next();
+    }
+});
+
+// ---------------------------------------------------------
+// HTTP Pipeline
+// ---------------------------------------------------------
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -41,7 +83,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// /healthz endpoint
+// ---------------------------------------------------------
+// /healthz Endpoint
+// ---------------------------------------------------------
 app.MapHealthChecks("/healthz", new HealthCheckOptions
 {
     ResponseWriter = async (context, report) =>
@@ -65,7 +109,9 @@ app.MapHealthChecks("/healthz", new HealthCheckOptions
     }
 });
 
-// Default route
+// ---------------------------------------------------------
+// MVC Routing
+// ---------------------------------------------------------
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

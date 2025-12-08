@@ -1,6 +1,25 @@
 # Hospital Supply Chain Management System (HSCMS)
 
 # 🏥 Hospital Supply Chain Management System  
+## Week 15 –Stored Procedures (HSCMSBD)
+# COP2839 ASP.NET Program w/C#
+# Instructor: Franklin Castillo 
+# Taneisha Milkunic
+# December 2025
+
+
+For Week 15 I implemented a stored procedure feature in the Hospital Supply Chain Management System to demonstrate how ASP.NET Core and EF Core can call SQL Server stored procedures safely. I focused on a realistic supply chain scenario: finding products that are at risk of stocking out.
+
+First, I created a T-SQL script called `DatabaseScripts/Week15_GetLowStockProducts.sql` and committed it to the repository. This script creates a stored procedure named `dbo.GetLowStockProducts` in the HSCMSDB database. The procedure takes one integer parameter, `@Threshold`, and returns rows from the `Products` table where `QuantityInStock` is less than or equal to that threshold. The results include key columns such as ProductId, Name, Category, QuantityInStock, UnitPrice, and SupplierId and are ordered by quantity and product name. I verified this procedure directly in SQL Server by running `EXEC dbo.GetLowStockProducts @Threshold = 10` and confirming that it returned the expected low-stock products.
+
+Next, I wired it into the MVC app using EF Core. In `HomeController`, I injected `ApplicationDbContext` and added a new action `LowStock(int threshold = 10)`. Inside this action I used `FromSqlInterpolated("EXEC dbo.GetLowStockProducts {threshold}")` to execute the stored procedure. This approach passes the `threshold` parameter safely instead of concatenating SQL, which helps prevent injection issues. The action returns a strongly-typed view (`Views/Home/LowStock.cshtml`) that renders the results in a table and explains that the data is coming from a stored procedure. I also updated my configuration so both `appsettings.json` and `appsettings.Development.json` point to the HSCMSDB database. Together, the SQL script, controller action, and view satisfy the Week 15 requirements for executing a stored procedure, handling parameters safely, and displaying the results in the UI with clear evidence in the repo.
+
+
+
+
+# Hospital Supply Chain Management System (HSCMS)
+
+# 🏥 Hospital Supply Chain Management System  
 ## Week 14 – Logging
 # COP2839 ASP.NET Program w/C#
 # Instructor: Franklin Castillo 

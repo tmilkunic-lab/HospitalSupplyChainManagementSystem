@@ -22,7 +22,8 @@ builder.Services.AddControllersWithViews();
 // EF Core DbContext
 // ---------------------------------------------------------
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("defaultConnection")));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // ---------------------------------------------------------
 // Business Services (DI)

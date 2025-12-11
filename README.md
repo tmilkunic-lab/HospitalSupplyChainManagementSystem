@@ -1,3 +1,25 @@
+
+# Hospital Supply Chain Management System (HSCMS)
+
+# 🏥 Hospital Supply Chain Management System  
+## Week 16 – Deployment to Azure
+# COP2839 ASP.NET Program w/C#
+# Instructor: Franklin Castillo 
+# Taneisha Milkunic
+# December 2025
+
+
+## Week 16 – Deployment to Azure (Simulated)
+
+This weeks goal was to deploy the HospitalSupplyChainManagementSystem ASP.NET Core MVC application to Azure App Service. I attempted to create an App Service using my Azure for Students subscription, but I ran into quota and credit limits that prevented me from provisioning any Free, Shared, or Basic App Service plans (error screenshots added in Git).
+Rather than spend personal money, I followed the alternate instructions and documented the full deployment process instead of completing a live deployment. The deployment plan I created walks through creating a resource group, provisioning an Azure App Service with the .NET 8 runtime, and setting up an Azure SQL Database named `HSCMSDB` for the Entity
+Framework Core data layer. It also explains how to store the `DefaultConnection` connection string as an App Service configuration value so that no secrets are checked into source control. Finally, it documents how I would publish the project from Visual Studio using the built-in Publish profile, and how I would verify that both the home page and 
+the `/healthz` endpoint are working in the cloud. Even though I could not complete an actual deployment with my current credits, the project is configured with production-ready settings such as `appsettings.Production.json` and health checks, and it is ready to be deployed to Azure once additional quota or a new subscription is available.
+
+
+
+
+
 # Hospital Supply Chain Management System (HSCMS)
 
 # 🏥 Hospital Supply Chain Management System  
